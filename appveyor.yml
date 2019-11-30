@@ -31,7 +31,7 @@ before_build:
 
 build_script:
     - cd build/win64
-    - ninja all Sourcetrail_test.exe
+    - ninja -v
     - cd ../../
 
 

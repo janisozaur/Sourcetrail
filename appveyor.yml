@@ -35,6 +35,8 @@ build_script:
     - ninja -v || set ERRORLEVEL=0
     - cd ../../
 
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 test_script:
     - cd bin/test

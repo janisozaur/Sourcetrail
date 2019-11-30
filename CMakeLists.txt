@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 if (WIN32 AND (CMAKE_GENERATOR STREQUAL "Ninja"))
-	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$(CMAKE_BUILD_TYPE}
+	set(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 endif()
 set(BUILD_CXX_LANGUAGE_PACKAGE OFF CACHE BOOL "Add C and C++ support to the Sourcetrail indexer.")
 set(BUILD_JAVA_LANGUAGE_PACKAGE OFF CACHE BOOL "Add Java support to the Sourcetrail indexer.")
@@ -593,14 +593,13 @@ if (WIN32)
 	set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
 
 	string(REGEX REPLACE "/" "\\\\" BACKSLASHED_CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR})
-	
 	string(REGEX REPLACE "/" "\\\\" BACKSLASHED_CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR})
 
 	add_custom_command(
 		TARGET ${APP_PROJECT_NAME}
 		POST_BUILD
-		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\app\\data" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\data" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\data"
-		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\app\\user" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\user" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\user"
+		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\data" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\data" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\data"
+		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\user" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\user" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\user"
 		COMMENT "create symbolic links for data"
 	)
 else ()

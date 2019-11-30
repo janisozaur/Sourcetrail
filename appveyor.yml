@@ -26,13 +26,12 @@ before_build:
     - mkdir win64
     - cd win64
     - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
-
-    - cmake -G "Ninja" -DBOOST_ROOT=C:/Libraries/boost_1_69_0 -DQt5_DIR=C:/Qt/5.12.5/msvc2017_64/lib/cmake/Qt5 -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON ../../
+    - cmake -G "Ninja" -DBOOST_ROOT=C:/Libraries/boost_1_69_0 -DQt5_DIR=C:/Qt/5.12.5/msvc2017_64/lib/cmake/Qt5 -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON -DCMAKE_BUILD_TYPE=Release ../../
     - cd ../../
 
 build_script:
     - cd build/win64
-    - ninja -v || set ERRORLEVEL=0
+    - ninja -v
     - cd ../../
 
 on_finish:
@@ -40,5 +39,5 @@ on_finish:
 
 test_script:
     - cd bin/test
-    - ..\..\build\win64\Sourcetrail_test.exe
+    - ..\..\build\win64\Release\test\Sourcetrail_test.exe
     - cd ../../

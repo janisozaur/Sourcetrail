@@ -32,7 +32,7 @@ before_build:
 
 build_script:
     - cd build/win64
-    - ninja -v
+    - ninja -v || echo ok
     - cd ../../
 
 

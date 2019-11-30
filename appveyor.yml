@@ -31,11 +31,11 @@ before_build:
 
 build_script:
     - cd build/win64
-    - ninja
+    - ninja all Sourcetrail_test.exe
     - cd ../../
 
 
 test_script:
     - cd bin/test
-    - ..\..\build\win64\test\Sourcetrail_test.exe
+    - ..\..\build\win64\Sourcetrail_test.exe
     - cd ../../

@@ -2,11 +2,10 @@ version: 0.0.0.{build}
 image: Visual Studio 2017
 
 install:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   ############################################################################
   # Install Ninja
   ############################################################################
-  - set NINJA_URL="https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip"
+  - set NINJA_URL="https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip"
   - appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
   - 7z x ninja.zip -oC:\projects\deps\ninja > nul
   - set PATH=C:\projects\deps\ninja;%PATH%
@@ -31,11 +30,8 @@ before_build:
 
 build_script:
     - cd build/win64
-    - ninja -v
+    - ninja
     - cd ../../
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 test_script:
     - cd bin/test

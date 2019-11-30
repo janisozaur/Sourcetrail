@@ -598,8 +598,10 @@ if (WIN32)
 	add_custom_command(
 		TARGET ${APP_PROJECT_NAME}
 		POST_BUILD
-		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\data" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\data" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\data"
-		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\user" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\${CMAKE_BUILD_TYPE}\\app\\user" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\user"
+		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\Debug\\app\\data" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\Debug\\app\\data" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\data"
+		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\Debug\\app\\user" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\Debug\\app\\user" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\user"
+		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\Release\\app\\data" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\Release\\app\\data" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\data"
+		COMMAND  rmdir "${BACKSLASHED_CMAKE_BINARY_DIR}\\Release\\app\\user" & mklink /d /j "${BACKSLASHED_CMAKE_BINARY_DIR}\\Release\\app\\user" "${BACKSLASHED_CMAKE_SOURCE_DIR}\\bin\\app\\user"
 		COMMENT "create symbolic links for data"
 	)
 else ()

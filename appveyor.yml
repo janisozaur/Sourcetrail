@@ -2,6 +2,7 @@ version: 0.0.0.{build}
 image: Visual Studio 2017
 
 install:
+  - iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   ############################################################################
   # Install Ninja
   ############################################################################
@@ -31,8 +32,10 @@ before_build:
 
 build_script:
     - cd build/win64
-    - ninja -v
     - cd ../../
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 
 test_script:
